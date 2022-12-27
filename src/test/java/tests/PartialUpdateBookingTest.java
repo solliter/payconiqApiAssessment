@@ -17,6 +17,26 @@ import static org.hamcrest.Matchers.is;
 
 public class PartialUpdateBookingTest extends BaseApi {
 
+
+    @Test()
+    @Description("Creating new booking, getting token, updating booking with name fields, checking all entities")
+    public void updateNameFields(){
+        BookingResponse newBooking = Create.createNewBooking(firstName,lastName,price,true,checkIn,checkOut,
+                additionalNeeds);
+        String token = Authentication.getToken(login, password);
+        BookingRequest bookingBody = new BookingRequest()
+                .setFirstName(newFirstName)
+                .setLastName(newLastName);
+        BookingUpdateResponse response = Update.partialUpdateBooking(bookingBody,token,newBooking.getBookingId());
+        assertThat(response.getFirstName(), is(newFirstName));
+        assertThat(response.getLastName(), is(newLastName));
+        assertThat(response.getTotalPrice(), is(price));
+        assertThat(response.getDepositPaid(), is(true));
+        assertThat(response.getBookingDates().getCheckIn(), is(checkIn));
+        assertThat(response.getBookingDates().getCheckOut(), is(checkOut));
+        assertThat(response.getAdditionalNeeds(), is(additionalNeeds));
+        assertThat(Delete.deleteBooking(newBooking.getBookingId(), token).statusCode(), is(201));
+    }
     @Test()
     @Description("Creating new booking, getting token, updating booking with all new fields, checking all new entities")
     public void updateAllFields(){
