@@ -7,7 +7,7 @@
 
 1.Easiest way open tests in IDE(i am using IDEA), run test class(DeleteBookingTests, GetBookingIdsTests, PartialUpdateBookingTests
 
-2.Type in console mvn clean test (in IDE) or in concole where pom file is.
+2.Type in console "mvn clean test" (in IDE) or in concole where pom file is.
 
 
 ### Usefull links 
