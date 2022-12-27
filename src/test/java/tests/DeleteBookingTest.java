@@ -1,3 +1,5 @@
+package tests;
+
 import api.entities.common.BookingResponse;
 import api.methods.Authentication;
 import api.methods.Create;
@@ -12,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 
-public class DeleteBookingTests extends BaseApi {
+public class DeleteBookingTest extends BaseApi {
 
     @Test()
     @Description("Creating booking, deleting it, checking if deleted")
@@ -30,7 +32,7 @@ public class DeleteBookingTests extends BaseApi {
     @Description("Creating random id that not exist, trying to delete it and checking error status")
     public void deleteNonExistedIdBooking(){
         String token = Authentication.getToken(login, password);
-        Response response = Delete.deleteBooking(randomNumbers(9), token);
+        Response response = Delete.deleteBooking(BaseApi.randomNumbers(9), token);
         assertThat(response.statusCode(), is(405));
     }
 
@@ -39,7 +41,7 @@ public class DeleteBookingTests extends BaseApi {
     public void deleteBookingWithWrongToken(){
         BookingResponse newBooking = Create.createNewBooking(firstName,lastName,price,true,checkIn,checkOut,
                 additionalNeeds);
-        Response response = Delete.deleteBooking(newBooking.getBookingId(), randomString(9));
+        Response response = Delete.deleteBooking(newBooking.getBookingId(), BaseApi.randomString(9));
         assertThat(response.statusCode(), is(403));
     }
 }

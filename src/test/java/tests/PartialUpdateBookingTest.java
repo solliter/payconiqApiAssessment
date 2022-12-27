@@ -1,3 +1,5 @@
+package tests;
+
 import api.entities.common.BookingRequest;
 import api.entities.common.BookingResponse;
 import api.entities.update.BookingUpdateResponse;
@@ -13,7 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 
-public class PartialUpdateBookingTests extends BaseApi {
+public class PartialUpdateBookingTest extends BaseApi {
 
     @Test()
     @Description("Creating new booking, getting token, updating booking with all new fields, checking all new entities")
@@ -51,7 +53,7 @@ public class PartialUpdateBookingTests extends BaseApi {
                 .setDepositPaid(false)
                 .setBookingDates(new BookingRequest.BookingDates(newCheckIn, newCheckOut))
                 .setAdditionalNeeds(newAdditionalNeeds);
-        Response response = Update.partialUpdateBookingNegative(bookingBody,token,randomNumbers(9));
+        Response response = Update.partialUpdateBookingNegative(bookingBody,token, BaseApi.randomNumbers(9));
         assertThat(response.statusCode(), is(405));
     }
 
@@ -68,7 +70,7 @@ public class PartialUpdateBookingTests extends BaseApi {
                 .setDepositPaid(false)
                 .setBookingDates(new BookingRequest.BookingDates(newCheckIn, newCheckOut))
                 .setAdditionalNeeds(newAdditionalNeeds);
-        Response response = Update.partialUpdateBookingNegative(bookingBody,randomString(9),newBooking.getBookingId());
+        Response response = Update.partialUpdateBookingNegative(bookingBody, BaseApi.randomString(9),newBooking.getBookingId());
         assertThat(response.statusCode(), is(403));
         assertThat(Delete.deleteBooking(newBooking.getBookingId(), token).statusCode(), is(201));
     }

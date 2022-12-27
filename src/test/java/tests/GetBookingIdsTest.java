@@ -1,3 +1,4 @@
+package tests;
 
 import api.entities.common.BookingResponse;
 import api.entities.read.GetBookingIdsResponse;
@@ -16,7 +17,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 
-public class GetBookingIdsTests  extends BaseApi {
+public class GetBookingIdsTest extends BaseApi {
 
     @Test()
     @Description("Creating new booking saving id, get all bookings and check is there new booking id")

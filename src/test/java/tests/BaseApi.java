@@ -1,3 +1,5 @@
+package tests;
+
 import jdk.jfr.Description;
 import org.apache.commons.lang3.RandomStringUtils;
 
